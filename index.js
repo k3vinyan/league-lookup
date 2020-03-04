@@ -1,96 +1,14 @@
 import React, { Component, useContext } from 'react'
 import ReactDOM from 'react-dom'
-import 'babel-polyfill';
+import 'babel-polyfill'
+import { fetchChampionsData } from './src/js/helpers.js'
 
-//Champion Data
-const ALL_CHAMP_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion.json'
-const FULL_CHAMP_BASE_URL ='http://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion/' //Aatrox.json
+//Components
+import ChampionsList from './src/components/ChampionsList'
+import Champion from './src/components/Champion'
+import Header from './src/components/header'
 
-//Champion img
-const SPLASH_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/' //Aatrox_0.jpg
-const LOADING_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/' //Aatrox_0.jpg
-const SQUARE_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/10.4.1/img/champion/' //Aatrox.png
-const PASSIVE_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/10.4.1/img/passive/' //Anivia_P.png
-const ABILITY_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/10.4.1/img/spell/' //FlashFrost.png
-
-
-function getLeagueImage(obj, type, options = {}) {
-    const SPLASH_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/' //Aatrox_0.jpg
-    const LOADING_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/' //Aatrox_0.jpg
-    const SQUARE_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/10.4.1/img/champion/' //Aatrox.png
-    const PASSIVE_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/10.4.1/img/passive/' //Anivia_P.png
-    const ABILITY_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/10.4.1/img/spell/' //FlashFrost.png
-
-    console.log(obj)
-
-    let url
-
-    if(type === "splash") {
-        url = `${SPLASH_BASE_URL}${obj.id}_0.jpg`
-        return url
-    } else if(type === "loading") {
-        url = `${LOADING_BASE_URL}${obj.id}_0.jpg`
-        return url
-    } else if(type === 'square') {
-        url = `${SQUARE_BASE_URL}${obj.id}.png`
-        return url
-    }else if(type === 'passive') {
-        url = `${PASSIVE_BASE_URL}${obj.id}_P.png`
-        return url
-    } else if(type ==='ability') {
-        url = `${ABILITY_BASE_URL}${options.ability}.png`
-    } else {
-        return {
-            error: 'type was not found' 
-        }
-    }
-}
-
-async function fetchChampionsData(url, setState) {
-    let championsObj = {}
-    let championsArr = []
-
-    try {
-        fetch(url)
-            .then( response => 
-                response.json())
-            .then( json => {
-                const data = json.data
-
-                for(let name in data) {
-                    fetchChampion(FULL_CHAMP_BASE_URL, name, championsObj, championsArr)
-                }
-
-               return {
-                   data: championsObj,
-                   champions: championsArr
-               }
-            }).then( obj =>{
-                setState(obj)
-            })   
-    } catch(e) {
-        console.error(e)
-    }
-}
-
-async function fetchChampion(url, name, obj, arr) {
-    
-    const urlName = `${url}${name}.json`
-
-    try {
-        fetch(urlName)
-            .then( response =>
-                response.json()
-            )
-            .then( json => {
-                obj[name] = json.data
-                arr.push(json.data[name])
-            })
-    } catch(e) {
-        console.error(e)
-    }
-}
-
+import './src/stylesheets/style.css'
 
 class App extends Component {
     constructor(props){
@@ -98,42 +16,108 @@ class App extends Component {
 
         this.state = {
             data: {},
-            champions: []
+            champions: [],
+            selectedChampions: [],
+            selectedChampion: null,
+            currentDescription: null,
+            value: ""
+            
         }
+
+        this.displayChampion = this.displayChampion.bind(this)
+        this.selectedChampionFn = this.selectedChampionFn.bind(this)
+        this.handleInputChange = this.handleInputChange.bind(this)
     }
 
     componentDidMount() {
         const setState = this.setState.bind(this)
-        fetchChampionsData(ALL_CHAMP_BASE_URL, setState)
+        fetchChampionsData(setState)
 
         setTimeout( ()=>{
             this.forceUpdate()
 
-        }, 1500)
+        }, 2000)
+    }
+
+    selectedChampionFn(e) {
+        const index = e.target.parentNode.id
+        let selected
+        
+
+        if(this.state.value.length > 0) {
+            selected = this.state.selectedChampions[index]
+        } else {
+            selected = this.state.champions[index]
+        }
+
+        this.setState({
+            selectedChampion: selected
+        })
+    }
+
+
+    displayChampion(e) {
+        const value = (e.target.value).toLowerCase()
+        const { champions } = this.state
+        const regExp = new RegExp(`${value}`, 'g')
+        const found = champions.filter( (champ) => {    
+            const name = champ.name.toLowerCase()
+            if(regExp.test(name)) {
+                return champ
+            }
+        })
+        this.setState({
+            selectedChampions: found
+        })
+        this.setState({
+            value
+        })
+    }
+
+    handleSearch(e) {
+        const {selectedChampion} = this.state
+        
+        if(selectedChampion !== null) {
+            this.setState({
+                selectedChampion: null
+            
+            })
+        }
+
+    }
+
+
+    handleInputChange(e) {
+        this.displayChampion(e)
+        this.handleSearch(e)
+
     }
 
     render() {
-       let { champions } = this.state;
-       let { data } = this.state; 
-
-       console.log("champions: ",champions)
-       console.log("data: ", data)
-
+       let { champions, selectedChampions, selectedChampion, value } = this.state;
+       let first = champions[0]
 
         return(
-            <div>
-                <ul>
-                    { champions.length > 0 ? champions.map( champ => {
-                        const imgSrc = getLeagueImage(champ, 'square')
-                        return (
-                            <li key={champ.id} >
-                                <img src={imgSrc} />
-                                <p>{champ.id}</p>
-                            </li>
-                        )
-                    }) : <li>loading...</li>} 
-                </ul>
-            </div>
+            <main>
+
+                {/* <Champion champion={first} /> */}
+
+                <Header title="Choose your Champion" />
+                <div className="search-container">
+                            <input className="search-input" type="text" placeholder="Search Champion..." onChange={this.handleInputChange} />
+                        </div>
+                {selectedChampion === null ?
+                    <ChampionsList  
+                        selectedChampions={selectedChampions} 
+                        searchValue={value} 
+                        allChampions={champions}
+                        fn = {this.selectedChampionFn}
+                    />
+                    :
+                    <Champion champion={selectedChampion} />
+                }
+            </main>
+            
         )
        
         

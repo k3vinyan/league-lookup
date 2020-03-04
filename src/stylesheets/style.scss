@@ -1,0 +1,192 @@
+$default-margin: 10px;
+$default-padding: 10px;
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+
+
+
+//---------------------- champion ------------------------------
+
+.main-container {
+    border: red 3px solid;
+    padding: $default-padding;
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.container {
+    padding: $default-padding;
+    margin: $default-padding;
+
+}
+
+.container.center {
+    text-align: center;
+}
+
+
+
+
+.border {
+    border: blue 1px solid;
+}
+
+.column {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+   padding: $default-padding;
+   margin: $default-padding;
+}
+
+ul.list {
+    display: flex;
+    list-style-type: none;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    border: green 1px solid;
+}
+
+
+// ------------------------------ main -------------------------------------
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    padding: 10px 20px 10px 20px;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+ 
+    input {
+        display: block;
+        box-sizing: border-box;
+        height: 50px;
+        line-height: 10px;
+        width: 90vw;
+        padding: 10px;
+        margin: 10px;
+        
+    }
+}
+
+
+.champions-container {
+    display: flex;
+    justify-content: center;
+    height: auto;
+
+    overflow: scroll;
+
+    ul.champions-list {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        list-style-type: none;
+        padding: 0;
+        
+
+        li.champion-list-item {
+            position: relative;
+            box-sizing: border-box;
+            text-align: center;
+            margin: 10px;
+
+
+            img.splash {
+                width: 100%;     
+            }
+
+            p.item-name {
+                position: absolute;
+                box-sizing: border-box;
+                width: 100%;
+                bottom: 0;
+                background: black;
+                color: white;
+                padding: 2px;
+            }
+
+        }
+
+        &:after {
+            content: "";
+            flex: auto;
+        }
+    }
+}
+
+.champion-container {
+    display: flex;
+
+
+    section {
+        padding: 10px;
+    }
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    height: 50%;
+}
+
+// // -------------------------- containers -------------------------- 
+// .section-1 {
+//     display: flex;
+//     flex-direction: row;
+// }
+
+
+
+// ul.spells-list {
+//     flex-grow: 2;
+//     list-style-type: none;
+
+//     li {
+//         margin: 10px 10px 10px 10px;
+//     }
+// }
+
+
+// .spell-container {
+//     .description {
+//         display: none;
+//     }
+// }
+
+// .passive-container {
+//     padding: 10px;
+//     flex-grow: 0;
+// }
+
+
+// .stats-container {
+//     width: 100%;
+//     height: 100%;
+// }
