@@ -5,6 +5,7 @@ import { fetchChampionsData } from './src/js/helpers.js'
 
 //Components
 import ChampionsList from './src/components/ChampionsList'
+import SearchBar from './src/components/SearchBar'
 import Champion from './src/components/Champion'
 import Header from './src/components/header'
 
@@ -24,7 +25,7 @@ class App extends Component {
             
         }
 
-        this.displayChampion = this.displayChampion.bind(this)
+        this.filterChampions = this.filterChampions.bind(this)
         this.selectedChampionFn = this.selectedChampionFn.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
     }
@@ -56,7 +57,7 @@ class App extends Component {
     }
 
 
-    displayChampion(e) {
+    filterChampions(e) {
         const value = (e.target.value).toLowerCase()
         const { champions } = this.state
         const regExp = new RegExp(`${value}`, 'g')
@@ -88,24 +89,19 @@ class App extends Component {
 
 
     handleInputChange(e) {
-        this.displayChampion(e)
+        this.filterChampions(e)
         this.handleSearch(e)
 
     }
 
     render() {
        let { champions, selectedChampions, selectedChampion, value } = this.state;
-       let first = champions[0]
 
         return(
             <main>
 
-                {/* <Champion champion={first} /> */}
-
                 <Header title="Choose your Champion" />
-                <div className="search-container">
-                            <input className="search-input" type="text" placeholder="Search Champion..." onChange={this.handleInputChange} />
-                        </div>
+                <SearchBar onChange={this.handleInputChange}/>
                 {selectedChampion === null ?
                     <ChampionsList  
                         selectedChampions={selectedChampions} 
