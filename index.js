@@ -46,9 +46,8 @@ class App extends Component {
     }
 
     handleChampionSelect(e) {
-        const index = e.target.parentNode.id
+        const index = e.target.parentNode.parentNode.id
         let selected
-        
 
         if(this.state.value.length > 0) {
             selected = this.state.selectedChampions[index]
@@ -108,12 +107,6 @@ class App extends Component {
         })
     }
 
-
-    setBackground() {
-
-    }
-
-
   
     handleInputChange(e) {
         this.filterChampions(e)
@@ -123,14 +116,12 @@ class App extends Component {
 
     render() {
        const { champions, selectedChampions, currentChampion, value, activeSpell } = this.state
-
+        
         let background ={
             background: 'black'
         }
 
        if(currentChampion != null) {
-        console.log(currentChampion)
-        console.log(getLeagueImage(currentChampion, 'splash'))
         const url = getLeagueImage(currentChampion, 'splash')
        
         background = {
@@ -138,14 +129,13 @@ class App extends Component {
         }
        }
 
-    //    const background = {
-    //     color: 'white',
-    //     backgroundImage: 'url(' + imgUrl + ')',
-    //   };
+       const title = "league of Legend"
+       const para = "With more than 140 champions, you’ll find the perfect match for your playstyle. Master one, or master them all."
+       const mainTitle = "Champions"
 
         return(
             <main className="main-container">
-                <Header title="Choose Your Champion" />
+                <Header title={title} mainTitle={mainTitle} para={para} />
                 <SearchBar onChange={this.handleInputChange}/>
                 <section className="main-content border" style={background}>
                     {currentChampion === null ?

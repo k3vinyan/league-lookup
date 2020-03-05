@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Anton|Arvo|Muli|Open+Sans+Condensed:300|Spartan|Trade+Winds&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -6,7 +7,7 @@
 }
 
 body {
-  background: #1f2327;
+  background: black;
 }
 
 .border {
@@ -14,6 +15,37 @@ body {
   border: white 3px solid;
   margin: 10px;
   padding: 10px;
+}
+
+.header-container {
+  font-family: "Muli", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header-container h1 {
+  font-family: "Trade Winds", cursive;
+  font-size: 70px;
+  color: #ffbb00;
+  text-shadow: 5px 5px 1px white;
+}
+.header-container h2 {
+  font-size: 28px;
+}
+.search-container {
+  display: flex;
+  justify-content: center;
+}
+.search-container input {
+  display: block;
+  box-sizing: border-box;
+  height: 50px;
+  line-height: 10px;
+  width: 90vw;
+  padding: 10px;
+  margin: 10px;
+  color: black;
 }
 
 .main-container {
@@ -29,47 +61,70 @@ body {
   justify-content: center;
   margin: 10px;
 }
-.main-container .search-container {
-  display: flex;
-  justify-content: center;
-}
-.main-container .search-container input {
-  display: block;
-  box-sizing: border-box;
-  height: 50px;
-  line-height: 10px;
-  width: 90vw;
-  padding: 10px;
-  margin: 10px;
-  color: black;
-}
 .main-container .main-content {
   display: flex;
   justify-content: flex-end;
   flex: 1;
   overflow: scroll;
 }
-.main-container .champions-list-container {
-  width: 100%;
-}
-.main-container .champions-list-container ul.champions-list {
+
+.champions-list-container {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  list-style-type: none;
+  font-size: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  font-family: "Trade Winds", cursive;
 }
-.main-container .champions-list-container ul.champions-list li {
-  margin: 5px;
-  background: black;
+.champions-list-container ul.champions-list {
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: row;
+  align-content: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: scroll;
+  padding-right: 20px;
+  padding-left: 20px;
 }
-.main-container .champions-list-container ul.champions-list::after {
-  content: "";
-  flex: auto;
+.champions-list-container ul.champions-list li.champions-list-item {
+  display: flex;
+  width: 150px;
+  height: 175px;
+  flex-direction: column;
+  padding: 10px;
+  margin: 10px;
 }
-
-.champions-list .item-name {
+.champions-list-container ul.champions-list li.champions-list-item h2.item-name {
+  background: rgba(255, 255, 255, 0);
+  color: white;
+  transform: translate(0px);
+  text-shadow: 0px 0px black;
+  padding: 2px;
+  transition: transform 0.5s, color 0.5s, text-shadow 0.5s;
+}
+.champions-list-container ul.champions-list li.champions-list-item .image-container {
   text-align: center;
-  background: black;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}
+.champions-list-container ul.champions-list li.champions-list-item .image-container img {
+  transform: rotate(3deg) scale(1.4);
+  transition: transform 0.5s;
+}
+.champions-list-container ul.champions-list li.champions-list-item:hover {
+  border: gold solid 3px;
+  background: gold;
+}
+.champions-list-container ul.champions-list li.champions-list-item:hover img {
+  transform: scale(1.1) rotate(-2deg);
+}
+.champions-list-container ul.champions-list li.champions-list-item:hover .item-name {
+  color: white;
+  background: rgba(255, 215, 0, 0);
+  text-shadow: 3px 3px black;
+  transform: translate(20px) scale(1.2);
 }
 
 .champion-container {
@@ -216,14 +271,14 @@ body {
   grid-column-end: 10;
   margin: 2px;
 }
-.grid-container .test {
+.grid-container .grid-animate-setting {
   grid-column-start: 1;
   grid-column-end: 10;
   padding: 5px;
   text-align: center;
   margin-bottom: 1px;
   width: 0%;
-  animation: animateStat 2s ease-out 1.5s 1 normal forwards;
+  animation: animateStat 1s ease-out 1.5s 1 normal forwards;
 }
 .grid-container .attack-item {
   background: linear-gradient(90deg, #ff1c1c, rgba(128, 0, 0, 0.01));
@@ -238,12 +293,26 @@ body {
   background: linear-gradient(90deg, #ffad14, rgba(160, 91, 0, 0.01));
 }
 
+.champions-list-item {
+  transform: translate3d(0);
+  opacity: 0;
+  animation: animateChampionSelection 1s ease-in 0s 1 normal forwards;
+}
+
 @keyframes animateStat {
   from {
     width: 0%;
   }
   to {
     width: 100%;
+  }
+}
+@keyframes animateChampionSelection {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

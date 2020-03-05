@@ -6,11 +6,14 @@ import { getLeagueImage } from '../js/helpers.js'
 
 const Champion = ({champion, id, onClick }) => {
     const { name } = champion
-    
     return (
         <li className="champions-list-item border"  onClick={onClick} id={id}>
-            <img src={getLeagueImage(champion, 'square')} />
-            <h2 className="item-name">{name}</h2>
+            <div className="image-container">
+                <img src={getLeagueImage(champion, 'square')} />
+            </div> 
+            <div className="parallelogram">
+                <h2 className="item-name">{name}</h2>
+            </div>
         </li>
     )
 }

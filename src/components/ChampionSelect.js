@@ -17,13 +17,13 @@ const Stats = ({ champion }) => {
             <h2>Stats</h2>
             <div className="grid-container">
                 <div className="grid-item"><p>Attack</p></div>
-                <div className="attack-item test" style={styleType(attack)}>{attack}</div>
+                <div className="attack-item grid-animate-setting" style={styleType(attack)}>{attack}</div>
                 <div className="grid-item"><p>Defense</p></div>
-                <div class="defense-item test" style={styleType(defense)}>{defense}</div>
+                <div className="defense-item grid-animate-setting" style={styleType(defense)}>{defense}</div>
                 <div className="grid-item"><p>Magic</p></div>
-                <div className="magic-item test" style={styleType(magic)}>{magic}</div>
+                <div className="magic-item grid-animate-setting " style={styleType(magic)}>{magic}</div>
                 <div className="grid-item"><p>Difficulty</p></div>
-                <div class="difficulty-item test" style={styleType(difficulty)}>{difficulty}</div>
+                <div className="difficulty-item grid-animate-setting" style={styleType(difficulty)}>{difficulty}</div>
            </div>
         </section>
     )
@@ -57,7 +57,6 @@ const Description = ( { activeSpell } ) => {
 
 const Passive = ( {champion, onClick, active=false} ) => {
     const { passive } = champion
-
     return active ?
     (
         <div className="passive-container active"  onClick={ () => onClick(passive)}>
