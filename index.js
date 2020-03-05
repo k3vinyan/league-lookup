@@ -1,14 +1,18 @@
-import React, { Component, useContext } from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import 'babel-polyfill'
+
+//helpers
 import { fetchChampionsData } from './src/js/helpers.js'
+import { getLeagueImage } from './src/js/helpers.js'
 
 //Components
 import ChampionsList from './src/components/ChampionsList'
 import SearchBar from './src/components/SearchBar'
-import Champion from './src/components/Champion'
-import Header from './src/components/header'
+import ChampionSelect from './src/components/ChampionSelect'
+import Header from './src/components/Header'
 
+//stylesheet
 import './src/stylesheets/style.css'
 
 class App extends Component {
@@ -19,15 +23,16 @@ class App extends Component {
             data: {},
             champions: [],
             selectedChampions: [],
-            selectedChampion: null,
-            currentDescription: null,
+            activeSpell: null,
+            currentChampion: null,
             value: ""
-            
+    
         }
 
         this.filterChampions = this.filterChampions.bind(this)
-        this.selectedChampionFn = this.selectedChampionFn.bind(this)
+        this.handleChampionSelect = this.handleChampionSelect.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleSpellSelect = this.handleSpellSelect.bind(this)
     }
 
     componentDidMount() {
@@ -40,7 +45,7 @@ class App extends Component {
         }, 2000)
     }
 
-    selectedChampionFn(e) {
+    handleChampionSelect(e) {
         const index = e.target.parentNode.id
         let selected
         
@@ -52,7 +57,11 @@ class App extends Component {
         }
 
         this.setState({
-            selectedChampion: selected
+            currentChampion: selected,
+            activeSpell: {
+                name: selected.passive.name,
+                description: selected.passive.description
+            }
         })
     }
 
@@ -61,33 +70,51 @@ class App extends Component {
         const value = (e.target.value).toLowerCase()
         const { champions } = this.state
         const regExp = new RegExp(`${value}`, 'g')
-        const found = champions.filter( (champ) => {    
+
+        const selectedChampions = champions.filter( (champ) => {    
             const name = champ.name.toLowerCase()
             if(regExp.test(name)) {
                 return champ
             }
         })
+
         this.setState({
-            selectedChampions: found
+            selectedChampions
         })
+
         this.setState({
             value
         })
     }
 
-    handleSearch(e) {
-        const {selectedChampion} = this.state
+    handleSearch() {
+        const {currentChampion} = this.state
         
-        if(selectedChampion !== null) {
+        if(currentChampion !== null) {
             this.setState({
-                selectedChampion: null
+                currentChampion: null
             
             })
         }
 
     }
 
+    handleSpellSelect({name, description}) {
+        this.setState({
+            activeSpell: {
+                name, 
+                description
+            }
+        })
+    }
 
+
+    setBackground() {
+
+    }
+
+
+  
     handleInputChange(e) {
         this.filterChampions(e)
         this.handleSearch(e)
@@ -95,29 +122,51 @@ class App extends Component {
     }
 
     render() {
-       let { champions, selectedChampions, selectedChampion, value } = this.state;
+       const { champions, selectedChampions, currentChampion, value, activeSpell } = this.state
+
+        let background ={
+            background: 'black'
+        }
+
+       if(currentChampion != null) {
+        console.log(currentChampion)
+        console.log(getLeagueImage(currentChampion, 'splash'))
+        const url = getLeagueImage(currentChampion, 'splash')
+       
+        background = {
+            backgroundImage: `url(${url})`
+        }
+       }
+
+    //    const background = {
+    //     color: 'white',
+    //     backgroundImage: 'url(' + imgUrl + ')',
+    //   };
 
         return(
-            <main>
-
-                <Header title="Choose your Champion" />
+            <main className="main-container">
+                <Header title="Choose Your Champion" />
                 <SearchBar onChange={this.handleInputChange}/>
-                {selectedChampion === null ?
-                    <ChampionsList  
-                        selectedChampions={selectedChampions} 
-                        searchValue={value} 
-                        allChampions={champions}
-                        fn = {this.selectedChampionFn}
-                    />
-                    :
-                    <Champion champion={selectedChampion} />
-                }
+                <section className="main-content border" style={background}>
+                    {currentChampion === null ?
+                        <ChampionsList  
+                            selectedChampions={selectedChampions} 
+                            searchValue={value} 
+                            allChampions={champions}
+                            handleChampionSelect = {this.handleChampionSelect}
+                            handleSpellSelect={this.handleSpellSelect}
+                        />
+                        :
+                        <ChampionSelect   
+                            champion={currentChampion} 
+                            activeSpell={activeSpell} 
+                            handleSpellSelect={this.handleSpellSelect}
+                        />
+                    }
+                </section>
             </main>
             
         )
-       
-        
-        
     }
 }
 
