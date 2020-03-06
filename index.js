@@ -125,7 +125,9 @@ class App extends Component {
         const url = getLeagueImage(currentChampion, 'splash')
        
         background = {
-            backgroundImage: `url(${url})`
+            backgroundImage: `url(${url})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover'
         }
        }
 

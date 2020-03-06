@@ -25,16 +25,18 @@ const ChampionsList = ({selectedChampions, allChampions, searchValue, handleCham
         <div className="champions-list-container">
             <ul className="champions-list">
                 { (searchValue.length > 0) ?
-                    selectedChampions.map( (champ, index) => {
-                        return (
-                            <Champion   key={champ.id} 
-                                        champion={champ} 
-                                        onClick={handleChampionSelect}
-                                        id={index} 
-                            />
-                            )
-                    })
-
+                    selectedChampions.length > 0 ?
+                        selectedChampions.map( (champ, index) => {
+                            return (
+                                <Champion   key={champ.id} 
+                                            champion={champ} 
+                                            onClick={handleChampionSelect}
+                                            id={index} 
+                                />
+                                )
+                        })
+                        : <div className="champions-list-nochampions">No Champions found</div>
+        
                     : allChampions.map( (champ, index) => {
                         return (
                             <Champion   

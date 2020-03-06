@@ -33,6 +33,7 @@ body {
 .header-container h2 {
   font-size: 28px;
 }
+
 .search-container {
   display: flex;
   justify-content: center;
@@ -114,23 +115,27 @@ body {
   transition: transform 0.5s;
 }
 .champions-list-container ul.champions-list li.champions-list-item:hover {
-  border: gold solid 3px;
-  background: gold;
+  border: #ffbb00 solid 3px;
+  background: #ffbb00;
 }
 .champions-list-container ul.champions-list li.champions-list-item:hover img {
   transform: scale(1.1) rotate(-2deg);
 }
 .champions-list-container ul.champions-list li.champions-list-item:hover .item-name {
   color: white;
-  background: rgba(255, 215, 0, 0);
+  background: rgba(255, 187, 0, 0);
   text-shadow: 3px 3px black;
   transform: translate(20px) scale(1.2);
+}
+.champions-list-container ul.champions-list .champions-list-nochampions {
+  font-size: 28px;
 }
 
 .champion-container {
   display: flex;
   flex-direction: row;
   min-height: 100%;
+  font-family: "Muli", sans-serif;
 }
 .champion-container .champion-image-container {
   display: flex;
@@ -141,13 +146,13 @@ body {
   background: black;
 }
 .champion-container .champion-image-container .champion-name-container {
-  font-family: "Trade Winds", cursive;
-  position: absolute;
   display: inline-block;
+  position: absolute;
   top: 30px;
+  font-family: "Trade Winds", cursive;
   font-size: 35px;
-  transform: rotate(-10deg) skew(-10deg);
   text-decoration: underline;
+  transform: rotate(-10deg) skew(-10deg);
 }
 .champion-container .champion-image-container .champion-name-container h1 {
   transform: rotate(5deg);
@@ -175,6 +180,7 @@ body {
   display: flex;
   color: white;
   flex-direction: column;
+  font-size: 14px;
   min-height: 100%;
 }
 .champion-container .champion-spell-container .spells-list-container {
@@ -204,6 +210,7 @@ body {
   transform: scale(1);
 }
 .champion-container .champion-spell-container .spells-list-container li h2 {
+  font-size: 18px;
   margin: 5px;
 }
 .champion-container .champion-spell-container .spells-list-container li img:hover {
@@ -216,30 +223,39 @@ body {
   transition: color 1s;
 }
 .champion-container .champion-spell-container .spells-list-container li .active h2 {
-  color: gold;
+  color: #ffbb00;
 }
 .champion-container .champion-spell-container .spells-list-container li .active p i {
-  color: gold;
+  color: #ffbb00;
 }
 .champion-container .champion-spell-container .spells-list-container li .active img {
-  border: gold 3px solid;
-  transform: scale(0.9);
+  border: #ffbb00 3px solid;
 }
 .champion-container .champion-spell-container .description-container {
-  min-height: 20%;
+  display: flex;
+  min-height: 22%;
+  max-height: 22%;
+  font-size: 16px;
 }
 .champion-container .champion-spell-container .description-container div:first-child {
+  width: 100%;
   background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  overflow: scroll;
 }
 .champion-container .champion-spell-container .description-container h2 {
+  color: #ffbb00;
   margin: 10px;
+  font-size: 24px;
 }
 .champion-container .champion-spell-container .description-container p {
+  color: #ffbb00;
   margin: 10px;
 }
 .champion-container .champion-info-container {
   display: flex;
   min-height: 47%;
+  font-size: 16px;
 }
 .champion-container .champion-info-container .stats-container {
   background: rgba(0, 0, 0, 0.5);
@@ -249,8 +265,10 @@ body {
 .champion-container .champion-info-container .lore-container {
   display: flex;
   flex-direction: column;
+  text-align: justify;
   padding: 10px;
   background: rgba(0, 0, 0, 0.5);
+  overflow: scroll;
   height: 95%;
   flex: 4;
 }
