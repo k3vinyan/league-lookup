@@ -68,13 +68,13 @@ class App extends Component {
     filterChampions(e) {
         const value = (e.target.value).toLowerCase()
         const { champions } = this.state
-        const regExp = new RegExp(`${value}`, 'g')
+        const regExp = new RegExp(`^${e.target.value}`, 'i')
 
         const selectedChampions = champions.filter( (champ) => {    
             const name = champ.name.toLowerCase()
-            if(regExp.test(name)) {
-                return champ
-            }
+
+            return regExp.test(name)
+            
         })
 
         this.setState({
