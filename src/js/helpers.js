@@ -1,12 +1,12 @@
 //Champion Data
-const ALL_CHAMP_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion.json'
-const FULL_CHAMP_BASE_URL ='http://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion/' //Aatrox.json
+const ALL_CHAMP_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion.json'
+const FULL_CHAMP_BASE_URL ='https://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion/' //Aatrox.json
 
-const SPLASH_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/' //Aatrox_0.jpg
-const LOADING_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/' //Aatrox_0.jpg
-const SQUARE_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/10.4.1/img/champion/' //Aatrox.png
-const PASSIVE_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/10.4.1/img/passive/' //Anivia_P.png
-const ABILITY_BASE_URL = 'http://ddragon.leagueoflegends.com/cdn/10.4.1/img/spell/' //FlashFrost.png
+const SPLASH_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/' //Aatrox_0.jpg
+const LOADING_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/' //Aatrox_0.jpg
+const SQUARE_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/10.4.1/img/champion/' //Aatrox.png
+const PASSIVE_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/10.4.1/img/passive/' //Anivia_P.png
+const ABILITY_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/10.4.1/img/spell/' //FlashFrost.png
 
 async function fetchChampionsData(setState, url = ALL_CHAMP_BASE_URL) {
     let championsObj = {}
