@@ -185,12 +185,8 @@ body {
     flex-direction: row;
     min-height: 100%;
 
-    //font-family: 'Spartan', sans-serif;
-    //font-family: 'Trade Winds', cursive;
-    //font-family: 'Open Sans Condensed', sans-serif;
     font-family: 'Muli', sans-serif;
-    //font-family: 'Arvo', serif;
-    //font-family: 'Anton', sans-serif;
+ 
 
     .champion-image-container {
         display: flex;
@@ -444,44 +440,4 @@ body {
         opacity: 1;
     }
 }
-
-
-
-
-// @media screen and (max-width: 1250px) {
     
-//     .champion-spell-container {
-//         padding:  0;
-//         .spells-list {
-//            h2 {
-//                background: red; 
-//                font-size: 12px !important;
-//            }
-//         }
-//     }
-    
-//     .description-container {
-//         min-height: auto;
-//         max-height: auto;
-//         padding: 0;
-//         div:first-child {
-           
-//         }
-
-//        h2 {
-//         font-size: 12px !important; 
-//        }
-
-//        p {
-//         font-size: 12px !important;
-//        }
-//     }
-//   }
-
-//   @media screen and (max-width: 800px) {
-//       .main-content {
-//         display: flex !important;
-//         flex-direction: column !important;
-//         background: blue !important;
-//       }
-//   }

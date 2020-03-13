@@ -131,7 +131,7 @@ class App extends Component {
         }
        }
 
-       const title = "league of Legend"
+       const title = "League of Legends"
        const para = "With more than 140 champions, you’ll find the perfect match for your playstyle. Master one, or master them all."
        const mainTitle = "Champions"
 

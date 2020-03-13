@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react": "^16.12.0"
+    "react-scripts": "^3.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -21,7 +22,8 @@
   },
   "scripts": {
     "webpack": "webpack",
-    "start:dev": "webpack && webpack-dev-server --hot"
+    "start:dev": "webpack && webpack-dev-server --hot",
+    "start": "node ./server.js"
   },
   "author": "",
   "license": "ISC"

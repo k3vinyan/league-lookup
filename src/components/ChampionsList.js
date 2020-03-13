@@ -11,7 +11,7 @@ const Champion = ({champion, id, onClick }) => {
             <div className="image-container">
                 <img src={getLeagueImage(champion, 'square')} />
             </div> 
-            <div className="parallelogram">
+            <div className="">
                 <h2 className="item-name">{name}</h2>
             </div>
         </li>
