@@ -1,5 +1,6 @@
 //Champion Data
-const ALL_CHAMP_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion.json'
+//const ALL_CHAMP_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion.json'
+const All = 'https://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion.json'
 const FULL_CHAMP_BASE_URL ='https://ddragon.leagueoflegends.com/cdn/10.4.1/data/en_US/champion/' //Aatrox.json
 
 const SPLASH_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/' //Aatrox_0.jpg
@@ -8,9 +9,11 @@ const SQUARE_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/10.4.1/img/cham
 const PASSIVE_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/10.4.1/img/passive/' //Anivia_P.png
 const ABILITY_BASE_URL = 'https://ddragon.leagueoflegends.com/cdn/10.4.1/img/spell/' //FlashFrost.png
 
-async function fetchChampionsData(setState, url = ALL_CHAMP_BASE_URL) {
+async function fetchChampionsData(setState, url = ALL) {
     let championsObj = {}
     let championsArr = []
+
+    console.log()
 
     try {
         fetch(url)
