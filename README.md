@@ -3,6 +3,7 @@ Application for players to search up their favorite or interested League of Lege
 
 # Technologies Used:
 Backend: Node, Express, Webpack
+
 Frontend: HTML, CSS, JavaScript, React
 
 # Future Endeavour:
